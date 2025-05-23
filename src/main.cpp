@@ -8,6 +8,7 @@ bool bezi = false;
 bool vypis = false;
 
 void setup() {
+  pinMode(2,OUTPUT);
   Serial.begin(115200);
   while (!Serial)
     ;
@@ -28,10 +29,12 @@ void loop() {
   if(vzdialenost>0 && vzdialenost<300 && !vypis) {
     Serial.printf("---------------- Rychlost: %lu\n",millis() - cas);
     vypis = true;
+    digitalWrite(2,0);
   }
   if(vzdialenost>0 && vzdialenost<400 && !bezi) {
     bezi = true;
     cas=millis();
+    digitalWrite(2,1);
   }
   if(vzdialenost>400 && vzdialenost<600) {
     bezi = false;
